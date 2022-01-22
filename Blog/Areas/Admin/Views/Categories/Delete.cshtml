@@ -1,0 +1,24 @@
+﻿@model Category
+
+@if (Model == null)
+{
+    <p class="alert alert-danger" role="alert">@ViewBag.Message</p>
+}
+else
+{
+    <div class="card" style="margin-top:30px;">
+        <div class="card-header">Kategori silme</div>
+        <div class="card-body">
+            @Model.Name isimli kategori silinecek. Silmek istediğinizden emin misiniz ?
+        </div>
+        <form class="card-body" asp-area="admin" asp-controller="Categories" asp-action="submitdelete">
+            <input type="hidden" asp-for="Id" />
+            <button class="btn btn-danger" type="submit">Evet, Sil!</button>
+        </form>
+
+    </div>
+}
+
+<div>
+       <a class="btn btn-secondary" asp-action="Index">Geri Dön</a>
+</div>

@@ -1,0 +1,21 @@
+﻿@model List<Category>
+
+<!-- Categories widget-->
+            <div class="card mb-4">
+                <div class="card-header">Categories</div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ( var cat in Model)
+                        {
+                             <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a asp-controller="blog" asp-action="GetByCategoryId" asp-route-catName="@cat.Name" >@cat.Name</a></li>
+                              
+                            </ul>
+                        </div>
+                        }
+                       
+                        
+                    </div>
+                </div>
+            </div>

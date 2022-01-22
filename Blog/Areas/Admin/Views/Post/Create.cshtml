@@ -1,0 +1,77 @@
+﻿@model CreatePostViewModel
+
+@{
+    ViewData["Title"] = "Create";
+   
+}
+
+<h1>Create</h1>
+
+<h4>BlogPost</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form asp-action="Create" enctype="multipart/form-data">
+           
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title"  class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlugUri"   class="control-label"></label>
+                <input asp-for="SlugUri" class="form-control" />
+                <span asp-validation-for="SlugUri" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Body" class="control-label"></label>
+                <textarea rows=5  asp-for="Body" class="form-control" ></textarea>
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brief" class="control-label"></label>
+                <textarea rows=5 asp-for="Brief" class="form-control" ></textarea>
+                <span asp-validation-for="Brief" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="PostImage" class="control-label"></label>
+                <input asp-for="PostImage" class="form-control" />
+                <span asp-validation-for="PostImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublisedDate" class="control-label"></label>
+                <input asp-for="PublisedDate" class="form-control" />
+                <span asp-validation-for="PublisedDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+     <div class="col-md-2"></div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index">Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/coderUtil.js"></script>
+      <script>
+        $(document).ready(function () {
+            $('#Title').change(function () {
+                $('#SlugUri').val(Slugify($('#Title').val()));
+            })
+        });
+    </script>
+}

@@ -1,0 +1,102 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    @RenderSection("HeadSection", false)
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Dashboard" asp-action="Index">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Blog" asp-action="Index">Home</a></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Post" asp-action="Index">Admin Panel</a>
+                    </li>
+
+                    @{
+
+                         var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                         var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="ProfilEdit" asp-route-id="@c.Value.ToString()"> @User.Identity.Name </a>
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" asp-controller="Account" asp-action="logout">Logout</a>
+                            </li>
+                        }
+
+
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="login">Login</a>
+                            </li>
+                        }
+
+                    }
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div>
+
+        @RenderBody()
+
+    </div>
+
+
+
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Blog Website @DateTime.Now.Year</p></div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable div").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@model List<BlogPost>
+@section HeadSection{
+<title> @ViewBag.Title</title>
+}
+
+<!-- Page header with logo and tagline-->
+<header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+            <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+        </div>
+    </div>
+</header>
+<!-- Page content-->
+<div class="container">
+    <div class="row">
+        <!-- Blog entries-->
+        <div class="col-lg-8">
+
+            <!-- Nested row for non-featured blog posts-->
+            <div id="myTable" class="row">
+               
+                @foreach (var post in Model)
+                { 
+                   @Html.PartialAsync("_postPartial",post).Result
+                }
+                
+            </div>
+            <!-- Pagination-->
+            <nav aria-label="Pagination">
+                <hr class="my-0" />
+                <ul class="pagination justify-content-center my-4">
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
+
+                    <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+         
+        <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                    
+                            <form asp-action="search" asp-controller="blog" class="input-group"  method="get">
+                                <input type="text" name="keyword" class="form-" placeholder="Search for...">
+                              
+                             
+                                    <button class="btn btn-secondary" type="submit">Go!</button>
+                                
+                            </form>
+                           
+                     
+                    </div>
+                </div>
+            <!-- Categories widget-->
+            @await Component.InvokeAsync("Category")
+            <!-- Side widget-->
+            <div class="card mb-4">
+                <div class="card-header">Side Widget</div>
+                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,16 @@
+﻿@model BlogPost
+
+<!-- Blog post-->
+<div class="col-lg-6">
+    <div class="card mb-4">
+        <a href="#!"><img class="card-img-top" src="/@Model.PostImage" alt="..." /></a>
+        <div class="card-body">
+            <h6 class="small text-muted">@Model.PublisedDate.ToShortDateString()</h6>
+            <h2  class="card-title h4">@Model.Title</h2>
+            <p class="card-text">@Model.Brief</p>
+         
+            <a  asp-controller="blog" asp-action="detail" asp-route-sluguri=@Model.SlugUri  class="btn btn-primary">Read more →</a>
+        </div>
+    </div>
+</div>
+

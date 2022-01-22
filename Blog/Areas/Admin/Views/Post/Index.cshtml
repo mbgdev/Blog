@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PostIndexViewModel>
+
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-primary " style="margin-top:10px; margin-bottom:10px;" >Blog Ekle</a>
+</p>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Post Listesi
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Kategori Id</th>
+                        <th>Makale Başlağı</th>
+                          <th>Kategori Adı</th>
+                            <th>Yayın Tarihi</th>
+                                <th>#</th>
+
+                      
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                       <th>Kategori Id</th>
+                        <th>Makale Başlağı</th>
+                          <th>Kategori Adı</th>
+                            <th>Yayın Tarihi</th>
+                            <th>#</th>
+
+                       
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.Title</td>
+                            <td>@p.CategoryName</td>
+                            <td>@p.PublisedTime</td>
+
+
+                            <td>
+
+                                <a class="btn btn-sm btn-danger"
+                               asp-area="admin"
+                               asp-controller="post"
+                               asp-action="delete"
+                               asp-route-id="@p.Id">Sil</a>
+
+
+                                <a class="btn btn-sm btn-warning"
+                               asp-area="admin"
+                               asp-controller="Post"
+                               asp-action="edit"
+                               asp-route-id="@p.Id">Düzenle</a>
+
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
